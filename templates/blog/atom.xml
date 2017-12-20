@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    
+    <title>Marco Scarpetta | Blog</title>
+    <link rel="self" href="{{SITE_URL}}{{request.path}}" />
+    <link href="{{SITE_URL}}"/>
+    <updated>{{updated|date:"Y-m-d\TH:i:s\Z"}}</updated>
+    <author>
+        <name>Marco Scarpetta</name>
+    </author>
+    <id>{{SITE_URL}}{{request.path}}</id>
+    <icon>{{static_url}}/favicon.png</icon>
+    <subtitle>Marco Scarpetta personal website</subtitle>
+    
+    {% for post in posts %}
+        <entry>
+        <title>{{post.title}}</title>
+        <link href="{{SITE_URL}}{% url 'post' post.date.year post.date|date:'m' post.uid %}"/>
+        <id>{{SITE_URL}}{% url 'post' post.date.year post.date|date:'m' post.uid %}</id>
+        <updated>{{post.date|date:"Y-m-d\TH:i:s\Z"}}</updated>
+        {% for author in post.authors.all %} 
+        <author>
+            <name>{{author.name}}</name>
+            <uri>{{SITE_URL}}{% url 'author' author.username %}</uri>
+            <email>{{author.email}}</email>
+        </author>
+        {% endfor %}
+        <content type="xhtml">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+                {{post.body_preview|safe}}
+            </div>
+        </content>
+        {% for tag in post.tags.all %}
+            <category term="{{tag.uid}}" scheme="{{SITE_URL}}{% url 'tag' tag.uid %}" label="{{tag.name}}"/>
+        {% endfor %}
+        </entry>
+    {% endfor %}
+</feed>

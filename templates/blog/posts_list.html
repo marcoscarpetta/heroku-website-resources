@@ -1,0 +1,40 @@
+{% load i18n %}
+
+{% if posts %}
+{% for post in posts %}
+<article class="post">
+
+    <header>
+        <a href="{% url 'post' post.date.year post.date|date:"m" post.uid %}">
+            <h1>{{post.title}}</h1>
+        </a>
+
+        <div class="post_infos">
+            {% trans "By" %}
+            {% for author in post.authors.all %}
+            <address><a href="{% url 'author' author.username %}">{{author.name}}</a></address>
+            {% endfor %}
+            <br>
+            
+            <time datetime="{{post.date|date:"Y-m-d\TH:i"}}">{{post.date|date:"Y/m/d H:i \U\T\C"}}</time>
+        </div>
+        
+        <div id="tags">
+            {% for tag in post.tags.all %}
+            <a href="{% url 'tag' tag.uid %}">{{tag.name}}</a>
+            {% endfor %}
+        </div>
+    </header>
+    
+    <div class="divider"></div>
+
+    {{post.body_preview|safe}}
+
+    <a href="{% url 'post' post.date.year post.date|date:"m" post.uid %}">{% trans "Continue reading..." %}</a>
+    <div class="post_divider"></div>
+    
+</article>
+{% endfor %}
+{% else %}
+<p>{% trans "No posts found." %}</p>
+{% endif %}

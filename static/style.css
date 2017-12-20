@@ -1,0 +1,131 @@
+@charset "UTF-8";
+
+/*
+ *  Copyright (C) 2016-2017 Marco Scarpetta
+ *
+ *  This work is licensed under the Creative Commons Attribution-ShareAlike 4.0
+ *  International License. To view a copy of this license, visit
+ *  http://creativecommons.org/licenses/by-sa/4.0/ or send a letter to Creative
+ *  Commons, PO Box 1866, Mountain View, CA 94042, USA.
+ */
+
+/* Global style */
+html {
+    font-size: 18px;
+}
+
+body {
+    width: 100%;
+    font-size: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #202020;
+    margin: 0px 0px;
+    padding: 0px 0px;
+}
+
+a {
+    text-decoration: none;
+    color: #0A5AFF;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #1E6EFF;
+}
+
+#content {
+    min-height: 120vh;
+    padding: 2rem 5vw 1rem 5vw;
+}
+
+/* Site header */
+#site_header {
+    background-color: #fff;
+    text-align: center;
+    padding: 3vmin 0px;
+}
+
+#site_header img {
+    height: 6rem;
+}
+
+#main_menu {
+    background-color: #37f;
+}
+
+#main_menu a {
+    display: block;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 0.8rem 0.8rem;
+    color: #fff;
+    text-decoration: none;
+}
+
+#main_menu a:hover {
+    background-color: #39f;
+    text-decoration: none;
+}
+
+footer {
+    border-top: 1px solid #ccc;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    padding: 1rem 1rem;
+}
+
+.footer_box {
+    max-width: 30vw;
+    display: inline-block;
+    vertical-align: top;
+    padding: 1rem 1rem;
+}
+
+#menu_button {
+    position: absolute;
+    top: -9999px;
+    left: -9999px; 
+}
+
+#menu_label {
+    display: block;
+    background: #ddd;
+    padding: 0.8rem 0.8rem;
+    text-align: center;
+}
+
+/* Media query */
+@media screen and (max-width: 480px) {
+    /* Toggled State */
+    #menu_button:checked ~ #expand {
+        display: none;
+    }
+    
+    .footer_box {
+        max-width: unset;
+        padding: 5% 5%;
+    }
+}
+
+/* Media query */
+@media screen and (min-width: 481px) {
+    #wrapper {
+        display: grid;
+        grid-template-columns: 1fr 4fr;
+    }
+    
+    #sidebar {
+        grid-column: 1;
+        grid-row: 1;
+        box-shadow: 5px 0px 5px #bbb;
+    }
+    
+    #main_content {
+        grid-column: 2;
+        grid-row: 1;
+    }
+    
+    #menu_label {
+        display: none;
+    }
+}

@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+
+<!--
+    Copyright (C) 2016 Marco Scarpetta
+
+    This work is licensed under the Creative Commons Attribution-ShareAlike 4.0
+    International License. To view a copy of this license, visit
+    http://creativecommons.org/licenses/by-sa/4.0/ or send a letter to Creative
+    Commons, PO Box 1866, Mountain View, CA 94042, USA.
+-->
+
+<svg width="100" height="100"
+     viewBox="0 0 100 100"
+     xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <style>
+        /* <![CDATA[ */
+        .color1 {
+            fill: #f40;
+            stroke: none;
+        }
+        
+        .color2 {
+            fill: #d40;
+            stroke: none;
+        }
+        
+        .color3 {
+            fill: #f53;
+            stroke: none;
+        }
+        /* ]]> */
+    </style>
+    
+    <defs>
+        <symbol id="m" 
+                 width="90" height="90"
+                 patternUnits="userSpaceOnUse">
+            <polygon  class="color1" points="10,0 30,0 20,90 0,90"/>
+            <polygon  class="color2" points="10,0 30,0 55,30 35,30"/>
+            <polygon  class="color1" points="80,0 60,0 70,90 90,90"/>
+            <polygon  class="color3" points="80,0 60,0 35,30 55,30"/>
+	    </symbol>
+        
+        <symbol id="s" 
+                 width="60" height="90"
+                 patternUnits="userSpaceOnUse">
+            <polygon  class="color3" points="50,0 30,0 5,30 25,30"/>
+            <polygon  class="color2" points="50,60 30,60 5,30 25,30"/>
+            <polygon  class="color3" points="50,60 30,60 5,90 25,90"/>
+	    </symbol>
+    </defs>
+    
+    <use x="5" y="5" xlink:href="#m">
+    </use>
+    <use x="35" y="5" xlink:href="#s">
+    </use>
+</svg>

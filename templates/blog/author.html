@@ -1,0 +1,32 @@
+{% extends "blog/base_blog.html" %}
+
+{% load i18n %}
+{% load static %}
+
+{% block title %}Author: {{author.name}}{% if page_number != 0 %} - Page {{page_number}}{% endif %}{% endblock %}
+
+{% block body %}
+<h1>{{author.name}}</h1>
+
+{% if not author.hide_picture %}
+<img src="{{author.picture_url}}" style="width: 100px;"></img>
+{% endif %}
+
+{{author.bio|safe}}
+
+<p><a href="{% url 'author_feed' author.username %}">Atom feed</a></p>
+
+<h2>Posts:</h2>
+
+{% include "blog/posts_list.html" %}
+
+<div style="text-align: center;">
+    {% if prev_posts != None %}
+    <a class="button_blue" href="{% url 'author' author.username prev_posts %}">{% trans "◀ Previous posts" %}</a>
+    {% endif %}
+
+    {% if next_posts != None %}
+    <a class="button_blue" href="{% url 'author' author.username next_posts %}">{% trans "Next posts ▶" %}</a>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% load i18n %}
+{% load static %}
+
+{% block head %}
+<link rel=stylesheet type=text/css href="{% static 'blog_style.css' %}">
+{% endblock %}
+
+{% block user_panel %}
+{% include "blog/user_panel.html" %}
+{% endblock %}

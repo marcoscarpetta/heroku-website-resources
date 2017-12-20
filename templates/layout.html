@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+
+<!--
+    Copyright (C) 2016-2017 Marco Scarpetta
+
+    This work is licensed under the Creative Commons Attribution-ShareAlike 4.0
+    International License. To view a copy of this license, visit
+    http://creativecommons.org/licenses/by-sa/4.0/ or send a letter to Creative
+    Commons, PO Box 1866, Mountain View, CA 94042, USA.
+-->
+
+    <head>
+        <title>{% block title %}{% endblock %} | Marco Scarpetta</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        {% block head %}{% endblock %}
+        
+        <link rel=stylesheet type=text/css href="{% static 'style.css' %}">
+        <link rel="SHORTCUT ICON" href="{% static 'favicon.png' %}">
+    </head>
+    <body>
+        <div id="wrapper">
+            <header id="sidebar">
+                <div id="site_header">
+                    <a href="{{SITE_URL}}" style="text-decoration:none">
+                        <img src="{% static 'animated-logo.svg' %}" alt="Site logo">
+                    </a>
+                </div>
+                
+                <label for="menu_button" id="menu_label">☰ Menu</label>
+                <input type="checkbox" id="menu_button" checked autocomplete="off">
+                
+                <div id="expand">
+                    {% block user_panel %}{% endblock %}
+                    
+                    <nav id="main_menu">
+                        <a href="/page/pdf-mix-tool">PDF Mix Tool</a>
+                        <a href="https://marcoscarpetta.github.io/poliba-average/">Poliba Average</a>
+                    </nav>
+                </div>
+            </header>
+            
+            <div id="main_content">
+                <div id="content">
+                    {% block body %}{% endblock %}
+                </div>
+                
+                <footer>
+                    <div class="footer_box">
+                        Except where otherwise noted, content on this site is licensed under a 
+                        <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+                            Creative Commons Attribution-ShareAlike 4.0 International License</a>.<br />
+                        <p style="text-align: center">
+                        <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+                            <img alt="Licenza Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" />
+                        </a>
+                        </p>
+                    </div>
+                    
+                    <div class="footer_box">
+                        <a href="{% url 'page' 'privacy-policy' %}">Privacy Policy</a><br>
+                        <a href="{% url 'feed' %}">Atom feed</a>
+                        <!--<a href="">Server-side source code</a>-->
+                    </div>
+                    
+                    <div class="footer_box">
+                        <span>Powered by:</span><br>
+                        <a href="https://www.djangoproject.com/">Django</a><br>
+                        <a href="https://www.python.org/">Python</a><br>
+                        <a href="https://www.postgresql.org/">PostgreSQL</a><br>
+                        <span>Hosted on:</span><br>
+                        <a href="https://www.heroku.com/">Heroku</a>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </body>
+</html>

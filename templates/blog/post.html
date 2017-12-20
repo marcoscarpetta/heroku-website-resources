@@ -1,0 +1,118 @@
+{% extends "blog/base_blog.html" %}
+
+{% load i18n %}
+{% load static %}
+
+{% block title %}{{post.title}}{% endblock %}
+
+{% block body %}
+<article class="post">
+
+    <header>
+        <h1>{{post.title}}</h1>
+
+        <div class="post_infos">
+            {% trans "By" %}
+            {% for author in post.authors.all %}
+            <address><a href="{% url 'author' author.username %}">{{author.name}}</a></address>
+            {% endfor %}
+            <br>
+            
+            <time datetime="{{post.date|date:"Y-m-d\TH:i"}}">{{post.date|date:"Y/m/d H:i \U\T\C"}}</time><!--
+            
+         -->{% if post.edit_date > post.date %}<time datetime="{{post.edit_date|date:"Y-m-d\TH:i"}}" id="edit_date">
+                {% trans "Last modified on: " %} {{post.edit_date|date:"Y/m/d H:i \U\T\C"}}
+            </time>{% endif %}
+        </div>
+        
+        <div id="tags">
+            {% for tag in post.tags.all %}
+            <a href="{% url 'tag' tag.uid %}">{{tag.name}}</a>
+            {% endfor %}
+        </div>
+    </header>
+    
+    <div class="divider"></div>
+
+    {{post.body|safe}}
+
+    <div class="post_divider"></div>
+    
+    {% if post.allow_comments %}
+        <h1>Comments</h1>
+
+        {% if not IS_SECURE %}
+            Go to <a href="{{SECURE_SITE_URL}}{{request.path}}">secure site</a> to comment.
+        {% elif logged_user %}
+            {% if logged_user.blocked %}
+                <p>You have been blocked.</p>
+            {% else %}
+                <p>
+                    Inviando un commento accetti le <a href="{{static_page_url}}/privacy_policy">
+                    Norme sulla Privacy</a>.
+                </p>
+                
+                <form action="{% url 'submit_comment' post.pk %}" method="post">
+                    {% csrf_token %}
+                    <p>Some HTML allowed:<p>
+                    <p>
+                        &lt;b&gt; <b>bold text</b> &lt;/b&gt;<br>
+                        &lt;i&gt; <i>italic text</i> &lt;/i&gt;<br>
+                        &lt;a href="http://example.com"&gt; <a href="http://example.com">link</a> &lt;/a&gt;<br>
+                    </p>
+                    
+                    <p><label>Your comment:</label></p>
+                    <textarea style="width: 80%; height: 30vh" id="comment" name="comment"></textarea>
+                    
+                    <p><button type="submit">Post comment</button></p>
+                </form>
+            {% endif %}
+        {% else %}
+            <p>
+                You need to login to comment on this post.
+            </p>
+        {% endif %}
+
+        {% for comment in post.comments.all %}
+            <div class="comment">
+            {% if comment.hidden %}
+                <p>This comment was deleted by the site staff.</p>
+            {% elif comment.author.hide_content %}
+                <p>The comments of this user have been hidden.</p>
+            {% else %}
+                {% if comment.deleted %}
+                <p>This comment was deleted by the user.</p>
+                {% else %}
+                <p>
+                    <img src="{{comment.author.picture_url}}" style="width: 50px; float: left; padding-right: 1rem" />
+                    {{comment.author.name}}<br />
+                    <time datetime="{{comment.date|date:"Y-m-d\TH:i"}}}}">{{comment.date|date:"Y/m/d H:i \U\T\C"}}</time>
+                </p>
+                <p style="white-space: pre-line">
+                    {{comment.body|safe}}
+                </p>
+                {% endif %}
+                
+                {% if logged_user and logged_user.pk == comment.author.pk %}
+                    <p>
+                        <a href="{% url 'toggle_delete_comment' comment.pk %}">
+                            {% if comment.deleted %}
+                            Restore this comment
+                            {% else %}
+                            Delete this comment
+                            {% endif %}
+                        </a>
+                    </p>
+                {% endif %}
+            {% endif %}
+            </div>
+            <br>
+        {% endfor %}
+    {% else %}
+        <p>
+        Comments disabled for this post.
+        </p>
+    {% endif %}
+    
+</article>
+{% endblock %}
