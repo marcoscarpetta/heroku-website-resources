@@ -12,17 +12,20 @@
         <h1>{{post.title}}</h1>
 
         <div class="post_infos">
-            {% trans "By" %}
-            {% for author in post.authors.all %}
-            <address><a href="{% url 'author' author.username %}">{{author.name}}</a></address>
-            {% endfor %}
-            <br>
+            <address>
+                {% trans "By" %}
+                {% for author in post.authors.all %}
+                <a href="{% url 'author' author.username %}">{{author.name}}</a>
+                {% endfor %}
+            </address>
             
-            <time datetime="{{post.date|date:"Y-m-d\TH:i"}}">{{post.date|date:"Y/m/d H:i \U\T\C"}}</time><!--
-            
-         -->{% if post.edit_date > post.date %}<time datetime="{{post.edit_date|date:"Y-m-d\TH:i"}}" id="edit_date">
-                {% trans "Last modified on: " %} {{post.edit_date|date:"Y/m/d H:i \U\T\C"}}
-            </time>{% endif %}
+            <time datetime="{{post.date|date:"Y-m-d\TH:i"}}">{{post.date|date:"Y/m/d H:i \U\T\C"}}</time>
+            {% if post.edit_date > post.date %} <br>
+            {% trans "Last modified on: " %}
+            <time datetime="{{post.edit_date|date:"Y-m-d\TH:i"}}" id="edit_date">
+                {{post.edit_date|date:"Y/m/d H:i \U\T\C"}}
+            </time>
+            {% endif %}
         </div>
         
         <div id="tags">

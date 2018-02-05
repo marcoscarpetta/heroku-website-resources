@@ -12,9 +12,10 @@
         <h1>{{page.title}}</h1>
 
         <div class="post_infos">
-            <date datetime="{{page.edit_date}}" id="edit_date">
-                {% trans "Last modified on: " %} {{page.edit_date}}
-            </date>
+            {% trans "Last modified on: " %} 
+            <time datetime="{{post.edit_date|date:"Y-m-d\TH:i"}}" id="edit_date">
+                {{page.edit_date|date:"Y/m/d H:i \U\T\C"}}
+            </time>
         </div>
     </header>
     

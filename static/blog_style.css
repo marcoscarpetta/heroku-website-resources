@@ -33,15 +33,16 @@
 
 /* Single post */
 .post h1 {
-    font-size: 1.75rem;
+    font-size: 2rem;
 }
 
 .post h2 {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
 }
 
 .post h3 {
     font-size: 1.25rem;
+    color: #303090;
 }
 
 .post > header h1 {
@@ -57,14 +58,29 @@
     overflow: auto;
 }
 
-.post_infos {
-    padding-bottom: 1rem;
+.post_infos address {
+    padding-bottom: 0.5rem;
 }
 
-.post_infos * {
+.post_infos time {
+    
+    color: #303090;
+}
+
+#tags {
+    padding-top: 1rem;
+}
+
+#tags a {
+    text-decoration: none;
+    background-color: #1E6EFF;
+    color: #fff;
+    padding: 0.2rem 0.5rem;
     display: inline-block;
-    font-size: 0.9rem;
-    font-style: normal;
+}
+
+#tags a:hover {
+    background-color: #4488ff;
 }
 
 .comment {
@@ -72,12 +88,7 @@
     padding: 1px 1rem;
 }
 
-.post_infos address {
-    padding-right: 0.5rem;
-    margin-right: 0.5rem;
-    border-right: 1px solid #444;
-}
-
+/* Buttons */
 .button_blue, .button_green, .button_red, button {
     font-size: 1rem;
     display: inline-block;
@@ -120,24 +131,6 @@
 .button_red:hover {
     background-color: #f50;
     color: #fff;
-}
-
-#edit_date {
-    padding-left: 0.5rem;
-    margin-left: 0.5rem;
-    border-left: 1px solid #444;
-}
-
-#tags a {
-    text-decoration: none;
-    background-color: #1E6EFF;
-    color: #fff;
-    padding: 0.2rem 0.5rem;
-    display: inline-block;
-}
-
-#tags a:hover {
-    background-color: #4488ff;
 }
 
 /* admin pages style */
